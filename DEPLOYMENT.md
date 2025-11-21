@@ -76,3 +76,14 @@ Setiap kali Anda mengubah kode atau menambah fitur baru, lakukan langkah ini unt
 
 3.  **Otomatis Deploy**:
     Vercel akan mendeteksi perubahan di GitHub dan otomatis melakukan deploy ulang. Tunggu 1-2 menit, dan website Anda akan terupdate sendiri.
+
+## Troubleshooting
+
+### Error: "Please tell me who you are"
+Jika saat commit muncul error ini, artinya Anda belum mengatur email dan nama di Git. Jalankan perintah ini:
+
+```bash
+git config --global user.email "email@anda.com"
+git config --global user.name "Nama Anda"
+```
+Ganti dengan email dan nama asli Anda.

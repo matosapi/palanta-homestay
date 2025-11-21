@@ -118,23 +118,23 @@ function renderPemesanan() {
                 <tbody>
                     ${bookings.map(b => `
                         <tr>
-                            <td style="color: var(--text-muted); font-weight: 500;">${b.id}</td>
-                            <td>
+                            <td data-label="ID" style="color: var(--text-muted); font-weight: 500;">${b.id}</td>
+                            <td data-label="Tamu">
                                 <div class="flex items-center gap-3">
                                     <div style="width: 32px; height: 32px; background: #F3F4F6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">👤</div>
                                     <span style="font-weight: 600; color: var(--text-main);">${b.guest}</span>
                                 </div>
                             </td>
-                            <td style="color: var(--text-muted);"><span style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"></path><path d="M20 22V7l-8-5-8 5v15"></path><path d="M12 16.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path></svg> ${b.room}</span></td>
-                            <td style="color: var(--text-muted);">${b.checkIn}</td>
-                            <td style="color: var(--text-muted);">${b.checkOut}</td>
-                            <td style="color: var(--primary); font-weight: 700;">Rp ${b.total.toLocaleString('id-ID')}</td>
-                            <td>
+                            <td data-label="Kamar" style="color: var(--text-muted);"><span style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h20"></path><path d="M20 22V7l-8-5-8 5v15"></path><path d="M12 16.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path></svg> ${b.room}</span></td>
+                            <td data-label="Check-in" style="color: var(--text-muted);">${b.checkIn}</td>
+                            <td data-label="Check-out" style="color: var(--text-muted);">${b.checkOut}</td>
+                            <td data-label="Total" style="color: var(--primary); font-weight: 700;">Rp ${b.total.toLocaleString('id-ID')}</td>
+                            <td data-label="Status">
                                 <span class="badge ${b.status === 'Terkonfirmasi' ? 'badge-success' : 'badge-warning'}">
                                     ${b.status}
                                 </span>
                             </td>
-                            <td>
+                            <td data-label="Aksi">
                                 <div class="flex gap-2">
                                     <button class="action-btn" title="Lihat Detail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
