@@ -56,3 +56,23 @@ Berikut adalah langkah-langkah untuk mengupload project ini ke GitHub dan men-de
 
 ## Selesai!
 Vercel akan memproses build dan memberikan link website Anda (misal: `palanta-homestay.vercel.app`).
+
+## Langkah 3: Cara Update Website (Jika ada perubahan)
+
+Setiap kali Anda mengubah kode atau menambah fitur baru, lakukan langkah ini untuk mengupdate website:
+
+1.  **Simpan Perubahan**:
+    Buka terminal di folder project dan ketik:
+    ```bash
+    git add .
+    git commit -m "Update fitur baru: nama fitur"
+    ```
+    *(Ganti "nama fitur" dengan deskripsi perubahan Anda)*
+
+2.  **Upload ke GitHub**:
+    ```bash
+    git push
+    ```
+
+3.  **Otomatis Deploy**:
+    Vercel akan mendeteksi perubahan di GitHub dan otomatis melakukan deploy ulang. Tunggu 1-2 menit, dan website Anda akan terupdate sendiri.
