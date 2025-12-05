@@ -1,3 +1,29 @@
+/* Hubungi Kami Button Fixed Bottom Right */
+.hubungi-kami-btn {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    background: linear-gradient(90deg, #25D366 0%, #128C7E 100%);
+    color: #fff;
+    border: none;
+    border-radius: 32px;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.18);
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 300;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.hubungi-kami-btn:hover {
+    background: linear-gradient(90deg, #128C7E 0%, #25D366 100%);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.28);
+    transform: scale(1.08);
+}
+
+.back-to-top {
+    bottom: 100px !important;
+}
 :root {
     --primary: #00A8A8;
     /* Teal from image */
@@ -10,8 +36,9 @@
     --white: #FFFFFF;
     --text-main: #333333;
     --text-light: #6B7280;
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Inter', sans-serif;
+    --font-heading: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    --font-sans-mobile: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 
 * {
@@ -21,10 +48,12 @@
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), var(--font-sans-mobile);
     color: var(--text-main);
     background-color: var(--light);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -33,8 +62,34 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-heading);
     color: var(--secondary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.05rem; }
+
+/* Component-specific font-weight rules */
+.btn-primary { font-weight: 700; }
+.btn-outline { font-weight: 600; }
+
+/* Navbar logo/title */
+.dashboard-nav .logo-container h2 { font-weight: 700; font-size: 18px; }
+
+/* Card titles */
+.dashboard-card h3 { font-weight: 600; font-size: 18px; color: var(--secondary); }
+
+/* Mobile: prefer system fonts to reduce webfont load and keep UI snappy */
+@media (max-width: 640px) {
+    body { font-family: var(--font-sans-mobile); }
+    .dashboard-nav .logo-container h2 { font-size: 16px; }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.25rem; }
 }
 
 a {
@@ -262,12 +317,33 @@ a {
     }
 }
 
+@keyframes modalIn {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 .animate-fade-in {
     animation: fadeIn 0.8s ease-out forwards;
 }
 
 .animate-slide-up {
     animation: slideUp 0.8s ease-out forwards;
+}
+
+.animate-modal-in {
+    animation: modalIn 0.6s cubic-bezier(.4,1.4,.6,1) both;
 }
 
 .hover-scale {
@@ -289,9 +365,23 @@ a {
 
 /* Promo Section */
 .promo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
     gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    padding-left: 40px; /* leave space so first card isn't covered by nav */
+    padding-right: 40px; /* leave space so last card isn't covered by nav */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbars visually while keeping scrolling usable */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.promo-grid::-webkit-scrollbar { display: none; }
+
+.promo-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
 }
 
 .promo-card {
@@ -922,6 +1012,109 @@ body.admin-body {
     color: white;
 }
 
+/* Custom styles for login card moved from login.html */
+.login-card {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 168, 168, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--primary);
+    font-size: 24px;
+    border: 2px solid var(--primary);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 168, 168, 0.1);
+}
+
+.admin-link {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.admin-link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Dashboard Navbar Enhancement */
+.dashboard-nav {
+    box-shadow: 0 4px 24px rgba(0,168,168,0.12), 0 1.5px 0 rgba(0,168,168,0.08);
+    border-bottom: 2px solid var(--primary);
+    background: linear-gradient(90deg, #e0f7fa 0%, #ffffff 100%);
+    padding: 18px 0 !important;
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+.dashboard-nav .logo-container h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,168,168,0.08);
+}
+
+.dashboard-nav .logo-icon {
+    border: 2.5px solid var(--primary);
+    background: rgba(0,168,168,0.12);
+    box-shadow: 0 2px 8px rgba(0,168,168,0.10);
+}
+
+.dashboard-nav .btn-primary {
+    box-shadow: 0 2px 8px rgba(0,168,168,0.10);
+    font-weight: 700;
+}
+
+.dashboard-nav .btn-outline {
+    border-width: 2px;
+    font-weight: 700;
+}
+
+.dashboard-nav #authBtnContainer {
+    gap: 20px !important;
+}
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
@@ -1165,3 +1358,162 @@ body.admin-body {
             margin-bottom: 10px;
         }
     }
+}
+
+/* Popup Notification Styles */
+.popup-notif {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 2000;
+    background: #10b981;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(16,185,129,0.15);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s, transform 0.4s;
+    pointer-events: none;
+}
+
+.popup-notif.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.popup-notif.success {
+    background: #10b981;
+}
+
+.popup-notif.error {
+    background: #ef4444;
+}
+
+/* Centered Popup Notification Styles */
+.center-popup-notif {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    background: rgba(0,0,0,0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+}
+.center-popup-notif.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.center-popup-notif .login-card {
+    box-shadow: 0 20px 40px rgba(0,168,168,0.15), 0 10px 20px rgba(0,0,0,0.08);
+    background: white;
+    animation: modalIn 0.6s cubic-bezier(.4,1.4,.6,1) both;
+}
+
+/* Copy Popup Notification Styles - Centered */
+.copy-popup-notif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    background: #fff;
+    color: var(--primary);
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 20px 40px rgba(0,168,168,0.15), 0 10px 20px rgba(0,0,0,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s, transform 0.4s;
+    z-index: 2100;
+    border: 2px solid var(--primary);
+    min-width: 320px;
+    max-width: 350px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.copy-popup-notif.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+.copy-popup-notif .copy-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 32px 22px 32px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.copy-popup-notif .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(0,168,168,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    color: var(--primary);
+    font-size: 22px;
+    border: 2px solid var(--primary);
+}
+.copy-popup-notif .copy-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 4px;
+    text-align: center;
+}
+.copy-popup-notif .copy-code {
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+/* Promo Grid Animation - Seamless & Smooth */
+.promo-grid-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+/* No auto animation: manual navigation via buttons */
+.promo-animate {
+    display: flex;
+    gap: 20px;
+    will-change: transform;
+}
+.promo-card {
+    min-width: 320px;
+    transition: transform 0.5s cubic-bezier(.4,1.4,.6,1);
+}
+
+/* Navigation buttons */
+.promo-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.95);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    z-index: 5;
+}
+.promo-prev { left: 12px; }
+.promo-next { right: 12px; }
+.promo-nav:hover { transform: translateY(-50%) scale(1.03); }
+.promo-nav:focus { outline: 2px solid var(--primary); }
