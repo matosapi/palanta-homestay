@@ -60,5 +60,5 @@ document.addEventListener('click', (e) => {
 });
 
 // Make functions globally available
-window.openRegisterModal = openRegisterModal;
-window.closeRegisterModal = closeRegisterModal;
+// window.openRegisterModal = openRegisterModal;
+// window.closeRegisterModal = closeRegisterModal;
